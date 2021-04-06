@@ -1,6 +1,10 @@
 package components;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.GridLayout;
 
 public class TableGroup {
@@ -13,17 +17,18 @@ public class TableGroup {
     private JScrollPane scrollBar;
     private String[] columns;
     private Object[][] data;
+    private DefaultTableModel model;
 
-    public TableGroup(String[] columns, Object[][] data, int width, int height, int x, int y) {
+    public TableGroup(String[] columns, int width, int height, int x, int y) {
         this.columns = columns;
-        this.data = data;
         this.width = width;
         this.height = height;
         this.x = x;
         this.y = y;
         this.panel = new JPanel();
         this.panel.setLayout(new GridLayout(1, 1));
-        this.table = new JTable(data, columns);
+        this.model = new DefaultTableModel(this.columns, 0);
+        this.table = new JTable(this.model);
         this.scrollBar = new JScrollPane(this.table);
         this.panel.add(this.scrollBar);        
         this.panel.setBounds(width, height, x, y);
@@ -63,5 +68,13 @@ public class TableGroup {
 
     public JPanel render() {
         return this.panel;
+    }
+
+    public void addRow(Object[] rowData) {
+        this.model.addRow(rowData);
+    }
+
+    public void clear() {
+        this.model.setRowCount(0); 
     }
 }

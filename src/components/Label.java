@@ -1,6 +1,6 @@
 package components;
 
-import javax.swing.*;
+import javax.swing.JLabel;
 
 public class Label {
     private String title;

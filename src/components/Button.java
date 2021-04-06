@@ -1,6 +1,6 @@
 package components;
 
-import javax.swing.*;
+import javax.swing.JButton;
 public class Button {
     private String title;
     private int width;

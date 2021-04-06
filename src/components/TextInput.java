@@ -1,6 +1,6 @@
 package components;
 
-import javax.swing.*;
+import javax.swing.JTextField;
 
 public class TextInput {
     private int columns;
