@@ -1,7 +1,6 @@
 package components;
 
 import javax.swing.*;
-
 public class Button {
     private String title;
     private int width;
@@ -42,5 +41,11 @@ public class Button {
 
     public JButton render() {
         return this.b;
+    }
+
+    public void onClick(Runnable function) {
+        this.b.addActionListener(e -> {
+            function.run();
+        });
     }
 }
