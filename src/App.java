@@ -1,15 +1,19 @@
-import javax.swing.*;
+import javax.swing.JFrame;
 
+import classes.Client;
 import classes.Database;
+import scripts.formatResult;
 import components.Button;
 import components.Label;
 import components.TableGroup;
 import components.TextInput;
 
 public class App {
+    static Database db = new Database("127.0.0.1", "atv2", "root", "12345678");
+    static formatResult result = new formatResult();
+
     public static void main(String[] args) throws Exception {
         System.out.println("Running!!");
-        Database db = new Database("127.0.0.1", "atv2", "root", "12345678");
         db.connect();
         createWindow();
     }
@@ -29,27 +33,16 @@ public class App {
         Button btnDelete = new Button("Excluir", 80, 40, 205, 130);
         Button btnEdit = new Button("Alterar", 90, 40, 290, 130);
         Button btnClear = new Button("Limpar", 95, 40, 385, 130);
-
-        Object [][] data = {
-            {"Ana Monteiro", "48 9923-7898", "ana.monteiro@gmail.com"},
-            {"João da Silva", "48 8890-3345", "joaosilva@hotmail.com"},
-            {"Joãxo da Silva", "48 8890-3345", "joaosilva@hotmail.com"},
-            {"Joãso da Silva", "48 8890-3345", "joaosilva@hotmail.com"},
-            {"Jo3ão da Silva", "48 8890-3345", "joaosilva@hotmail.com"},
-            {"Jwoão da Silva", "48 8890-3345", "joaosilva@hotmail.com"},
-            {"Joãdo da Silva", "48 8890-3345", "joaosilva@hotmail.com"},
-            {"Pedro Cascaes", "48 9870-5634", "pedrinho@gmail.com"}
-        };
-    
-        String [] cols = {"ID", "Nome", "E-mail"};
         
-        TableGroup table = new TableGroup(cols, data, 20, 180, 460, 180);
+        String[] cols = {"ID", "Nome", "E-mail"};
+        Client[] clients = result.formatClient(db.select("client"));
+        TableGroup table = new TableGroup(cols, 20, 180, 460, 180);
 
         btnInsert.onClick(() -> System.out.println("BtnInsert"));
-        btnSelect.onClick(() -> System.out.println("btnSelect"));
+        btnSelect.onClick(() -> fetchClients(table, clients));
         btnDelete.onClick(() -> System.out.println("btnDelete"));
         btnEdit.onClick(() -> System.out.println("btnEdit"));
-        btnClear.onClick(() -> System.out.println("btnClear"));
+        btnClear.onClick(() -> table.clear());
 
         frame.add(table.render());
         frame.add(labelId.render());
@@ -69,5 +62,13 @@ public class App {
         frame.setSize(500,400);
         frame.setLayout(null);
         frame.setVisible(true);
+    }
+
+    public static void fetchClients(TableGroup table, Client[] clients) {
+        for (int i = 0; i < clients.length; i++) {
+          table.addRow(new Object[] {
+            clients[i].getId(), clients[i].getName(), clients[i].getEmail()
+          });
+        }
     }
 }
