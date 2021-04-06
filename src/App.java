@@ -1,12 +1,16 @@
 import javax.swing.*;
 
+import classes.Database;
 import components.Button;
 import components.Label;
 import components.TableGroup;
 import components.TextInput;
+
 public class App {
     public static void main(String[] args) throws Exception {
         System.out.println("Running!!");
+        Database db = new Database("127.0.0.1", "atv2", "root", "12345678");
+        db.connect();
         createWindow();
     }
 
