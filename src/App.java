@@ -2,17 +2,17 @@ import javax.swing.*;
 
 import components.Button;
 import components.Label;
+import components.TableGroup;
 import components.TextInput;
-
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+        System.out.println("Running!!");
         createWindow();
     }
 
     public static void createWindow() {
         JFrame frame = new JFrame("App Conexão com BD"); 
-
+    
         Label labelId = new Label("ID:", 40, 20, 140, 30);
         Label labelName = new Label("Nome:", 60, 20, 140, 60);
         Label labelEmail = new Label("E-Mail:", 60, 20, 140, 90);
@@ -26,11 +26,28 @@ public class App {
         Button btnEdit = new Button("Alterar", 90, 40, 290, 130);
         Button btnClear = new Button("Limpar", 95, 40, 385, 130);
 
-        JTable table = new JTable(20 , 3);
+        Object [][] data = {
+            {"Ana Monteiro", "48 9923-7898", "ana.monteiro@gmail.com"},
+            {"João da Silva", "48 8890-3345", "joaosilva@hotmail.com"},
+            {"Joãxo da Silva", "48 8890-3345", "joaosilva@hotmail.com"},
+            {"Joãso da Silva", "48 8890-3345", "joaosilva@hotmail.com"},
+            {"Jo3ão da Silva", "48 8890-3345", "joaosilva@hotmail.com"},
+            {"Jwoão da Silva", "48 8890-3345", "joaosilva@hotmail.com"},
+            {"Joãdo da Silva", "48 8890-3345", "joaosilva@hotmail.com"},
+            {"Pedro Cascaes", "48 9870-5634", "pedrinho@gmail.com"}
+        };
+    
+        String [] cols = {"ID", "Nome", "E-mail"};
+        
+        TableGroup table = new TableGroup(cols, data, 20, 180, 460, 180);
 
-        table.setBounds(20, 180, 460, 180);
+        btnInsert.onClick(() -> System.out.println("BtnInsert"));
+        btnSelect.onClick(() -> System.out.println("btnSelect"));
+        btnDelete.onClick(() -> System.out.println("btnDelete"));
+        btnEdit.onClick(() -> System.out.println("btnEdit"));
+        btnClear.onClick(() -> System.out.println("btnClear"));
 
-        frame.add(table);
+        frame.add(table.render());
         frame.add(labelId.render());
         frame.add(inputId.render());
         frame.add(labelName.render());
@@ -43,8 +60,10 @@ public class App {
         frame.add(btnEdit.render());
         frame.add(btnClear.render());
 
+        frame.setDefaultCloseOperation(3);
+        frame.setResizable(false);
         frame.setSize(500,400);
         frame.setLayout(null);
         frame.setVisible(true);
-    }    
+    }
 }
