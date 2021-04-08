@@ -5,8 +5,8 @@ import java.sql.SQLException;
 
 import classes.Client;
 
-public class formatResult {
-    public Client[] formatClient(ResultSet result) {
+public class FormatResult {
+    public static Client[] formatClient(ResultSet result) {
         Client[] client = new Client[30];
         Client[] output;
         int size = 0;
