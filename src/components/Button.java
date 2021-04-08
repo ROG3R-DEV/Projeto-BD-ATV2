@@ -39,13 +39,13 @@ public class Button {
         return this.y;
     }
 
-    public JButton render() {
-        return this.b;
-    }
-
     public void onClick(Runnable function) {
         this.b.addActionListener(e -> {
             function.run();
         });
+    }
+
+    public JButton render() {
+        return this.b;
     }
 }
