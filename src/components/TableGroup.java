@@ -3,6 +3,8 @@ package components;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.GridLayout;
@@ -65,16 +67,38 @@ public class TableGroup {
     public int getY() {
         return this.y;
     }
-
-    public JPanel render() {
-        return this.panel;
-    }
-
+    
     public void addRow(Object[] rowData) {
         this.model.addRow(rowData);
+    }
+    
+    public void setEnabled(boolean enabled) {
+        this.table.setEnabled(enabled);
     }
 
     public void clear() {
         this.model.setRowCount(0); 
+    }
+
+    public int getSelectedRow() {
+        return this.table.getSelectedRow();
+    }
+
+    public String getValueAt(int row, int column) {
+        return this.table.getValueAt(row, column).toString();
+    }
+
+    public void onSelectItem(Runnable function) {
+        this.table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent event) {
+                if (getSelectedRow() != -1) { 
+                    function.run();
+                }
+            }
+        });
+    }
+    
+    public JPanel render() {
+        return this.panel;
     }
 }
