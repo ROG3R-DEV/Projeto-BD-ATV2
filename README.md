@@ -20,5 +20,6 @@ A filosofia deste projeto se trata de uma aplicação java que se conecta a um b
 The workspace contains two folders by default, where:
 
 - `src`: the folder to maintain sources
-- `components`: the folder contains visual components
+- `src/components`: the folder contains visual components
+- `src/scripts`: the folder contains scripts and methods
 - `lib`: the folder to maintain dependencies
