@@ -20,6 +20,14 @@ public class TextInput {
         this.t.setBounds(x, y, width, height);
     }
 
+    public void setText(String text) {
+        this.t.setText(text);
+    }
+
+    public void setEditable(boolean editable) {
+        this.t.setEditable(editable);
+    }
+
     public int getColumns() {
         return this.columns;
     }
@@ -38,6 +46,18 @@ public class TextInput {
 
     public int getY() {
         return this.y;
+    }
+
+    public String getText() {
+        return this.t.getText();
+    }
+
+    public void onFocus(Runnable function) {
+        this.t.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent e) {
+                function.run();
+            }
+        });
     }
 
     public JTextField render() {
