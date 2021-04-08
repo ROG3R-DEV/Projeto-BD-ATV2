@@ -65,6 +65,32 @@ public class Database {
         } 
     }
 
+    public void edit(int id, String name, String email) {
+        try {
+            PreparedStatement stmt = this.con.prepareStatement("UPDATE client SET name = ?, email = ? WHERE id = ?");
+            stmt.setString(1, name); 
+            stmt.setString(2, email);
+            stmt.setInt(3, id);
+            stmt.execute();
+            stmt.close();
+            System.out.println("Edited!");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } 
+    }
+
+    public void delete(int id) {
+        try {
+            PreparedStatement stmt = this.con.prepareStatement("DELETE FROM client WHERE id = ?");
+            stmt.setInt(1, id); 
+            stmt.execute();
+            stmt.close();
+            System.out.println("Deleted!");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } 
+    }
+
     public void closeStatement() {
         try {
             this.statement.close();
